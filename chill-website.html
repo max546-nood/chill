@@ -1,0 +1,2914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website to Chill</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    /* Custom styles for the chill website */
+    .animated-bg {
+      min-height: 100vh;
+      transition: all 1s;
+      background: linear-gradient(-45deg, #e6eecf 0%, #a398b2 25%, #355c7d 60%, #e3eaf2 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .alt-bg {
+      background: linear-gradient(-45deg, #a398b2 0%, #3a6ea5 50%, #bfcad6 100%);
+      background-size: 200% 200%;
+      animation: gradientBGalt 32s ease-in-out infinite;
+    }
+
+    .mauve-bg {
+      background: linear-gradient(-45deg, #a398b2 0%, #b6a7c9 50%, #8c7a99 100%);
+      background-size: 200% 200%;
+      animation: gradientBGmauve 32s ease-in-out infinite;
+    }
+
+    .bw-mix-bg {
+      background: linear-gradient(-45deg, #2c3e50 0%, #34495e 25%, #7f8c8d 50%, #95a5a6 75%, #ecf0f1 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .tech-bg {
+      background: linear-gradient(-45deg, #1e3c72 0%, #2a5298 25%, #4a90e2 50%, #7bb3f0 75%, #a8d8ff 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .sunset-bg {
+      background: linear-gradient(-45deg, #ff6b6b 0%, #ffa07a 25%, #ffd93d 50%, #ff8e53 75%, #ff6b9d 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .nature-bg {
+      background: linear-gradient(-45deg, #2d5016 0%, #4a7c59 25%, #7fb069 50%, #a7c957 75%, #d4e157 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .corporate-bg {
+      background: linear-gradient(-45deg, #1e3a8a 0%, #3b82f6 25%, #60a5fa 50%, #93c5fd 75%, #dbeafe 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .neon-bg {
+      background: linear-gradient(-45deg, #ff006e 0%, #8338ec 25%, #3a86ff 50%, #06ffa5 75%, #ffbe0b 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .earth-bg {
+      background: linear-gradient(-45deg, #8b4513 0%, #a0522d 25%, #cd853f 50%, #deb887 75%, #f5deb3 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .ocean-bg {
+      background: linear-gradient(-45deg, #001f3f 0%, #034694 25%, #0074d9 50%, #7fdbff 75%, #b3d9ff 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .royal-bg {
+      background: linear-gradient(-45deg, #4b0082 0%, #800080 25%, #9932cc 50%, #ba55d3 75%, #dda0dd 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .black-silver-bg {
+      background: linear-gradient(-45deg, #1a1a1a 0%, #333333 25%, #4d4d4d 50%, #666666 75%, #808080 100%);
+      background-size: 200% 200%;
+      animation: gradientBG 32s ease-in-out infinite;
+    }
+
+    .glass-box {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .glass-box:hover {
+      transform: scale(1.05);
+    }
+
+    .ripple {
+      position: fixed;
+      pointer-events: none;
+      z-index: 10;
+      animation: ripple-effect 1.1s ease-out forwards;
+    }
+
+    .box-animate {
+      opacity: 1;
+      filter: none;
+      animation: boxAnimate 0.7s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+    }
+
+    .slide-up {
+      animation: slideUpFade 1.1s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 100%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes gradientBGalt {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 100%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes gradientBGmauve {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 100%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes ripple-effect {
+      0% {
+        opacity: 0.7;
+        transform: scale(0.1);
+      }
+      60% {
+        opacity: 0.35;
+        transform: scale(1.15);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.18);
+      }
+    }
+
+    @keyframes boxAnimate {
+      0% {
+        opacity: 0;
+        transform: translateY(80px) scale(0.98);
+        filter: blur(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes slideUpFade {
+      to {
+        transform: translateY(-120vh) scale(0.98);
+        opacity: 0;
+        filter: blur(6px);
+      }
+    }
+
+    @keyframes progressPulse {
+      0%, 100% {
+        opacity: 1;
+        stroke-width: 8;
+      }
+      50% {
+        opacity: 0.8;
+        stroke-width: 10;
+      }
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .animate-breathe {
+      animation: breathe 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // Error Boundary to catch rendering errors
+    class ErrorBoundary extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { hasError: false, error: null };
+      }
+      static getDerivedStateFromError(error) {
+        return { hasError: true, error };
+      }
+      componentDidCatch(error, errorInfo) {
+        // You can log errorInfo to an error reporting service here
+        console.error('ErrorBoundary caught an error:', error, errorInfo);
+      }
+      render() {
+        if (this.state.hasError) {
+          return (
+            <div style={{ padding: 40, color: '#fff', background: '#1a202c', minHeight: '100vh' }}>
+              <h1 style={{ fontSize: 32, marginBottom: 16 }}>😢 Oops! Something went wrong.</h1>
+              <pre style={{ background: '#2d3748', padding: 16, borderRadius: 8, color: '#f87171' }}>
+                {this.state.error && this.state.error.toString()}
+              </pre>
+              <p style={{ marginTop: 24 }}>Try refreshing the page, or check the console for more details.</p>
+            </div>
+          );
+        }
+        return this.props.children;
+      }
+    }
+
+    function Button({ children, className = '', ...props }) {
+      return (
+        <button
+          className={`bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-all duration-300 ${className}`}
+          {...props}
+        >
+          {children}
+        </button>
+      );
+    }
+
+    function ChillWebsite() {
+      const [backgroundMode, setBackgroundMode] = useState(0);
+      const [currentSection, setCurrentSection] = useState("welcome");
+      const [ripples, setRipples] = useState([]);
+
+      const handleBackgroundSwitch = (e) => {
+        e.stopPropagation();
+        setBackgroundMode((prev) => (prev + 1) % 13);
+        // Apply animation from file 'a' to the button
+        console.log('Button clicked, attempting animation...');
+        if (window.waapi) {
+          console.log('waapi found, animating...');
+          window.waapi.animate('.circle', {
+            backgroundColor: 'color(display-p3 1.0 0.267 0.267 / 1.0)',
+            duration: 1000,
+            easing: 'easeInOutQuad'
+          });
+        } else if (window.anime) {
+          console.log('anime found, using anime instead...');
+          window.anime({
+            targets: '.circle',
+            backgroundColor: '#ff4444',
+            duration: 1000,
+            easing: 'easeInOutQuad',
+            direction: 'alternate'
+          });
+        } else {
+          console.log('No animation library found');
+        }
+        
+        // Simple morphing animation
+        const $path1 = document.getElementById('path-1');
+        if ($path1 && window.anime) {
+          // Generate random points for new shape
+          function generateRandomPoints() {
+            const total = Math.floor(Math.random() * 6) + 4; // 4-10 points
+            let points = '';
+            for (let i = 0; i < total; i++) {
+              const angle = (2 * Math.PI * i / total) - Math.PI / 2;
+              const radius = 15 + Math.random() * 10; // 15-25 radius
+              const x = 50 + Math.round(radius * Math.cos(angle));
+              const y = 50 + Math.round(radius * Math.sin(angle));
+              points += `${x},${y} `;
+            }
+            return points;
+          }
+          
+          // Animate the polygon to new random points
+          window.anime({
+            targets: $path1,
+            points: generateRandomPoints(),
+            duration: 600,
+            easing: 'easeInOutQuad',
+            update: function(anim) {
+              // Force update the points attribute
+              $path1.setAttribute('points', anim.animations[0].currentValue);
+            }
+          });
+        }
+      };
+
+      const handleRippleClick = (e) => {
+        if (e.target.closest("#bg-switch")) return;
+
+        const rect = document.body.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        let color = "rgba(180,220,200,0.45)";
+        switch (backgroundMode) {
+          case 0: color = "rgba(180,220,200,0.45)"; break;
+          case 1: color = "rgba(80,140,200,0.45)"; break;
+          case 2: color = "rgba(163,152,178,0.45)"; break;
+          case 3: color = "rgba(128,128,128,0.45)"; break;
+          case 4: color = "rgba(70,130,180,0.45)"; break;
+          case 5: color = "rgba(255,182,193,0.45)"; break;
+          case 6: color = "rgba(144,238,144,0.45)"; break;
+          case 7: color = "rgba(52,152,219,0.45)"; break;
+          case 8: color = "rgba(255,20,147,0.45)"; break;
+          case 9: color = "rgba(210,180,140,0.45)"; break;
+          case 10: color = "rgba(135,206,250,0.45)"; break;
+          case 11: color = "rgba(138,43,226,0.45)"; break;
+          case 12: color = "rgba(180,220,200,0.45)"; break;
+          default: color = "rgba(180,220,200,0.45)";
+        }
+
+        const newRipple = {
+          id: Date.now(),
+          x,
+          y,
+          color,
+        };
+
+        setRipples((prev) => [...prev, newRipple]);
+
+        setTimeout(() => {
+          setRipples((prev) => prev.filter((ripple) => ripple.id !== newRipple.id));
+        }, 1100);
+      };
+
+      const getBackgroundClass = () => {
+        switch (backgroundMode) {
+          case 0: return "animated-bg";
+          case 1: return "alt-bg";
+          case 2: return "mauve-bg";
+          case 3: return "bw-mix-bg";
+          case 4: return "tech-bg";
+          case 5: return "sunset-bg";
+          case 6: return "nature-bg";
+          case 7: return "corporate-bg";
+          case 8: return "neon-bg";
+          case 9: return "earth-bg";
+          case 10: return "ocean-bg";
+          case 11: return "royal-bg";
+          case 12: return "black-silver-bg";
+          default: return "animated-bg";
+        }
+      };
+
+      return (
+        <div className={`min-h-screen transition-all duration-1000 ${getBackgroundClass()}`} onClick={handleRippleClick}>
+          {/* Background Switch Button */}
+          {currentSection !== "chat" && (
+            <div className="fixed top-6 right-6 z-50">
+              {/* Morphing Polygon Shapes - Outside the circle */}
+              <div className="absolute -inset-8">
+                <svg className="w-32 h-32" viewBox="0 0 100 100">
+                  <polygon
+                    id="path-1"
+                    points="50,10 60,20 70,10 60,0"
+                    fill="rgba(255,255,255,0.2)"
+                    stroke="rgba(255,255,255,0.4)"
+                    strokeWidth="1"
+                    className="morphing-shape"
+                  />
+                  <polygon
+                    id="path-2"
+                    points="50,10 60,20 70,10 60,0"
+                    fill="none"
+                    stroke="none"
+                    className="morphing-target"
+                  />
+                </svg>
+              </div>
+              
+              {/* Circular Color Picker */}
+              <div className="relative w-16 h-16">
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                  {/* Color segments */}
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="url(#colorGradient)" strokeWidth="8" />
+                  
+                  {/* Gradient definitions */}
+                  <defs>
+                    <linearGradient id="colorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#e6eecf" />
+                      <stop offset="16.67%" stopColor="#a398b2" />
+                      <stop offset="33.33%" stopColor="#355c7d" />
+                      <stop offset="50%" stopColor="#e3eaf2" />
+                      <stop offset="66.67%" stopColor="#1a1a1a" />
+                      <stop offset="83.33%" stopColor="#808080" />
+                      <stop offset="100%" stopColor="#e6eecf" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Clickable segments */}
+                  <circle 
+                    cx="50" cy="50" r="45" 
+                    fill="none" 
+                    stroke="transparent" 
+                    strokeWidth="8"
+                    className="cursor-pointer hover:opacity-80 transition-opacity"
+                    onClick={handleBackgroundSwitch}
+                  />
+                </svg>
+                
+                {/* Center button */}
+                <div 
+                  className="absolute inset-0 flex items-center justify-center"
+                  onClick={handleBackgroundSwitch}
+                >
+                  <div className="w-8 h-8 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full cursor-pointer hover:bg-white/30 transition-all duration-300 flex items-center justify-center">
+                    <span className="text-white text-xs font-medium">C</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Ripple Effects */}
+          {ripples.map((ripple) => (
+            <div
+              key={ripple.id}
+              className="ripple fixed pointer-events-none z-10"
+              style={{
+                left: ripple.x - 300,
+                top: ripple.y - 300,
+                background: `radial-gradient(circle, ${ripple.color} 0%, ${ripple.color.replace("0.45", "0.18")} 40%, ${ripple.color.replace("0.45", "0.08")} 70%, rgba(255,255,255,0.01) 100%)`,
+              }}
+            />
+          ))}
+
+          {/* Welcome Section */}
+          {currentSection === "welcome" && (
+            <main className="flex flex-col items-center justify-center min-h-screen text-center text-white transition-all duration-1000">
+              <h1 className="text-6xl md:text-8xl font-light mb-8 tracking-wide">Welcome</h1>
+              <Button
+                onClick={() => setCurrentSection("main")}
+                className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white text-xl px-8 py-4 rounded-full transition-all duration-300 mb-6"
+              >
+                Start
+              </Button>
+              <p className="text-xl opacity-80">Relax and enjoy the vibe!</p>
+            </main>
+          )}
+
+          {/* Main Section */}
+          {currentSection === "main" && (
+            <section className="flex flex-col items-center justify-center min-h-screen px-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full box-animate">
+                <div className="glass-box group cursor-pointer" onClick={() => setCurrentSection("games")}>
+                  <div className="w-full bg-transparent hover:bg-white/10 text-white text-lg font-medium mb-4 transition-all duration-300">
+                    Play Mini Game
+                  </div>
+                  <svg className="w-12 h-12 text-[#355c7d] group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="2" y="6" width="20" height="12" rx="4"/>
+                    <path d="M6 12h.01M10 12h.01M14 12h.01M18 12h.01"/>
+                  </svg>
+                </div>
+
+                <div className="glass-box group cursor-pointer" onClick={() => setCurrentSection("concentrate")}>
+                  <div className="w-full bg-transparent hover:bg-white/10 text-white text-lg font-medium mb-4 transition-all duration-300">
+                    Concentrate
+                  </div>
+                  <svg className="w-12 h-12 text-[#355c7d] group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="6"/>
+                    <circle cx="12" cy="12" r="2"/>
+                  </svg>
+                </div>
+
+                <div className="glass-box group cursor-pointer" onClick={() => setCurrentSection("chat")}>
+                  <div className="w-full bg-transparent hover:bg-white/10 text-white text-lg font-medium mb-4 transition-all duration-300">
+                    Chat World Wide
+                  </div>
+                  <svg className="w-12 h-12 text-[#355c7d] group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M2 12h20"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/>
+                  </svg>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Games Section */}
+          {currentSection === "games" && (
+            <section className="flex flex-col items-center justify-center min-h-screen px-4">
+              <div className="w-full max-w-6xl mb-6">
+                <Button
+                  onClick={() => setCurrentSection("main")}
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white"
+                >
+                  ← Back to Main Menu
+                </Button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full box-animate">
+                <GameCard
+                  title="Tic Tac Toe"
+                  description="Classic Xs and Os. Try to win against your opponent!"
+                  color="#4158D0"
+                  onPlay={() => setCurrentSection("tictactoe")}
+                />
+                <GameCard
+                  title="Memory"
+                  description="Test your memory by matching pairs of cards as fast as you can."
+                  color="#C850C0"
+                  onPlay={() => setCurrentSection("memory")}
+                />
+                <GameCard
+                  title="Hangman"
+                  description="Guess the word letter by letter before the drawing is complete!"
+                  color="#FFCC70"
+                  onPlay={() => setCurrentSection("hangman")}
+                />
+                <GameCard
+                  title="Math Game"
+                  description="Answer 10 random math questions. Test your skills and speed!"
+                  color="#3FB4FF"
+                  onPlay={() => setCurrentSection("math")}
+                />
+              </div>
+            </section>
+          )}
+
+          {/* Concentrate Section */}
+          {currentSection === "concentrate" && (
+            <section className="flex flex-col items-center justify-center min-h-screen px-4">
+              <div className="w-full max-w-4xl mb-6">
+                <Button
+                  onClick={() => setCurrentSection("main")}
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white"
+                >
+                  ← Back to Main Menu
+                </Button>
+              </div>
+
+              <div className="glass-box max-w-2xl w-full text-center">
+                <div className="mb-8">
+                  <svg className="w-16 h-16 text-[#355c7d] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="6"/>
+                    <circle cx="12" cy="12" r="2"/>
+                  </svg>
+                  <h2 className="text-3xl font-bold text-white mb-4">Concentrate</h2>
+                  <p className="text-white/80 text-lg mb-8">
+                    Find your focus and inner peace with our concentration tools and exercises.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div
+                    className="glass-box group cursor-pointer hover:scale-105 transition-all duration-300"
+                    onClick={() => setCurrentSection("meditation")}
+                  >
+                    <div className="text-4xl mb-4">🧘‍♀️</div>
+                    <h3 className="text-xl font-semibold text-white mb-3">Meditation Timer</h3>
+                    <p className="text-white/80 text-sm">
+                      Set a timer for your meditation sessions with calming background sounds.
+                    </p>
+                  </div>
+
+                  <div
+                    className="glass-box group cursor-pointer hover:scale-105 transition-all duration-300"
+                    onClick={() => setCurrentSection("breathing")}
+                  >
+                    <div className="text-4xl mb-4">🌊</div>
+                    <h3 className="text-xl font-semibold text-white mb-3">Breathing Exercise</h3>
+                    <p className="text-white/80 text-sm">
+                      Follow guided breathing patterns to reduce stress and improve focus.
+                    </p>
+                  </div>
+
+                  <div
+                    className="glass-box group cursor-pointer hover:scale-105 transition-all duration-300"
+                    onClick={() => setCurrentSection("sounds")}
+                  >
+                    <div className="text-4xl mb-4">🎵</div>
+                    <h3 className="text-xl font-semibold text-white mb-3">Focus Sounds</h3>
+                    <p className="text-white/80 text-sm">
+                      Listen to ambient sounds designed to enhance concentration and productivity.
+                    </p>
+                  </div>
+
+                  <div
+                    className="glass-box group cursor-pointer hover:scale-105 transition-all duration-300"
+                    onClick={() => setCurrentSection("pomodoro")}
+                  >
+                    <div className="text-4xl mb-4">⏰</div>
+                    <h3 className="text-xl font-semibold text-white mb-3">Pomodoro Timer</h3>
+                    <p className="text-white/80 text-sm">
+                      Use the Pomodoro technique to break work into focused intervals.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Game Sections */}
+          {currentSection === "tictactoe" && <TicTacToeGame onBack={() => setCurrentSection("games")} />}
+          {currentSection === "memory" && <MemoryGame onBack={() => setCurrentSection("games")} />}
+          {currentSection === "hangman" && <HangmanGame onBack={() => setCurrentSection("games")} />}
+          {currentSection === "math" && <MathGame onBack={() => setCurrentSection("games")} />}
+
+          {/* Chat Section */}
+          {currentSection === "chat" && <AIChat onBack={() => setCurrentSection("main")} />}
+
+          {/* Concentrate Tool Sections */}
+          {currentSection === "meditation" && <MeditationTimer onBack={() => setCurrentSection("concentrate")} />}
+          {currentSection === "breathing" && <BreathingExercise onBack={() => setCurrentSection("concentrate")} />}
+          {currentSection === "sounds" && <FocusSounds onBack={() => setCurrentSection("concentrate")} />}
+          {currentSection === "pomodoro" && <PomodoroTimer onBack={() => setCurrentSection("concentrate")} />}
+        </div>
+      );
+    }
+
+    function GameCard({ title, description, color, onPlay }) {
+      return (
+        <div className="glass-box group">
+          <div
+            className="w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto"
+            style={{ backgroundColor: `${color}20` }}
+          >
+            <div className="w-8 h-8 rounded" style={{ backgroundColor: color }} />
+          </div>
+          <h3 className="text-xl font-semibold text-white mb-3">{title}</h3>
+          <p className="text-white/80 text-sm mb-6 leading-relaxed">{description}</p>
+          <Button
+            onClick={onPlay}
+            className="w-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-full transition-all duration-300"
+          >
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+            Play
+          </Button>
+        </div>
+      );
+    }
+
+    // Tic Tac Toe Game Component
+    function TicTacToeGame({ onBack }) {
+      const [board, setBoard] = useState(Array(9).fill(null));
+      const [xIsNext, setXIsNext] = useState(true);
+      const [gameOver, setGameOver] = useState(false);
+      const [scores, setScores] = useState({ playerX: 0, playerO: 0, draws: 0 });
+      const [vsAI, setVsAI] = useState(true);
+
+      const calculateWinner = (squares) => {
+        const lines = [
+          [0, 1, 2], [3, 4, 5], [6, 7, 8],
+          [0, 3, 6], [1, 4, 7], [2, 5, 8],
+          [0, 4, 8], [2, 4, 6],
+        ];
+
+        for (const line of lines) {
+          const [a, b, c] = line;
+          if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return squares[a];
+          }
+        }
+        return null;
+      };
+
+      const winner = calculateWinner(board);
+      const isDraw = board.every((cell) => cell) && !winner;
+
+      const handleClick = (i) => {
+        if (board[i] || gameOver || winner) return;
+
+        const newBoard = [...board];
+        newBoard[i] = xIsNext ? "X" : "O";
+        setBoard(newBoard);
+        setXIsNext(!xIsNext);
+      };
+
+      // Minimax AI for unbeatable Tic Tac Toe
+      const makeAIMove = () => {
+        if (gameOver || winner) return;
+        
+        // Minimax implementation
+        const aiPlayer = "O";
+        const humanPlayer = "X";
+
+        function minimax(newBoard, isMaximizing) {
+          const win = calculateWinner(newBoard);
+          if (win === aiPlayer) return { score: 1 };
+          if (win === humanPlayer) return { score: -1 };
+          if (newBoard.every(cell => cell)) return { score: 0 };
+
+          const moves = [];
+          for (let i = 0; i < 9; i++) {
+            if (!newBoard[i]) {
+              const boardCopy = [...newBoard];
+              boardCopy[i] = isMaximizing ? aiPlayer : humanPlayer;
+              const result = minimax(boardCopy, !isMaximizing);
+              moves.push({
+                index: i,
+                score: result.score
+              });
+            }
+          }
+
+          if (isMaximizing) {
+            // AI's turn: maximize score
+            let max = -Infinity;
+            let bestMove = null;
+            for (const move of moves) {
+              if (move.score > max) {
+                max = move.score;
+                bestMove = move;
+              }
+            }
+            return bestMove;
+          } else {
+            // Human's turn: minimize score
+            let min = Infinity;
+            let bestMove = null;
+            for (const move of moves) {
+              if (move.score < min) {
+                min = move.score;
+                bestMove = move;
+              }
+            }
+            return bestMove;
+          }
+        }
+
+        // Only make a move if there are empty spots
+        const emptySquares = board.map((cell, index) => cell === null ? index : null).filter(index => index !== null);
+        if (emptySquares.length === 0) return;
+
+        // Use minimax to find the best move
+        const best = minimax(board, true);
+        const bestMove = best ? best.index : emptySquares[0];
+
+        setTimeout(() => {
+          const newBoard = [...board];
+          newBoard[bestMove] = aiPlayer;
+          setBoard(newBoard);
+          setXIsNext(true);
+        }, 500);
+      };
+
+      const resetGame = () => {
+        setBoard(Array(9).fill(null));
+        setXIsNext(true);
+        setGameOver(false);
+      };
+
+      // Effect to trigger AI move when it's AI's turn
+      useEffect(() => {
+        if (vsAI && !xIsNext && !gameOver && !winner) {
+          makeAIMove();
+        }
+      }, [xIsNext, gameOver, winner, vsAI]);
+
+      useEffect(() => {
+        if (winner || isDraw) {
+          setGameOver(true);
+          if (winner === "X") {
+            setScores((prev) => ({ ...prev, playerX: prev.playerX + 1 }));
+          } else if (winner === "O") {
+            setScores((prev) => ({ ...prev, playerO: prev.playerO + 1 }));
+          } else if (isDraw) {
+            setScores((prev) => ({ ...prev, draws: prev.draws + 1 }));
+          }
+        }
+      }, [winner, isDraw]);
+
+      const getStatus = () => {
+        if (winner) return `🎉 ${winner === "X" ? "You" : "AI"} Wins!`;
+        if (isDraw) return "🤝 It's a Draw!";
+        return `${xIsNext ? "Your" : "AI's"} Turn`;
+      };
+
+      return (
+        <section className="flex flex-col items-center justify-center min-h-screen px-4">
+          <div className="glass-box max-w-lg w-full">
+            <div className="flex justify-between items-center mb-6">
+              <Button onClick={onBack} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                ← Back
+              </Button>
+              <h2 className="text-2xl font-bold text-white">Tic Tac Toe</h2>
+              <div className="w-16" />
+            </div>
+
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">{scores.playerX}</div>
+                <div className="text-white/80 text-sm">Your Wins</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">{scores.draws}</div>
+                <div className="text-white/80 text-sm">Draws</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">{scores.playerO}</div>
+                <div className="text-white/80 text-sm">AI Wins</div>
+              </div>
+            </div>
+
+            <div className="text-center mb-6">
+              <div className="text-xl font-semibold text-white mb-2">{getStatus()}</div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 mb-6 max-w-xs mx-auto">
+              {board.map((cell, i) => (
+                <button
+                  key={i}
+                  className={`aspect-square bg-white/20 backdrop-blur-sm border-2 rounded-xl text-3xl font-bold transition-all duration-200 flex items-center justify-center hover:scale-105 ${
+                    cell === "X"
+                      ? "border-blue-400/50 text-blue-300"
+                      : cell === "O"
+                        ? "border-red-400/50 text-red-300"
+                        : "border-white/30 text-white hover:bg-white/30"
+                  } ${!cell && !gameOver ? "cursor-pointer" : "cursor-default"}`}
+                  onClick={() => handleClick(i)}
+                  disabled={!!cell || gameOver}
+                >
+                  {cell}
+                </button>
+              ))}
+            </div>
+
+            <Button
+              onClick={resetGame}
+              className="w-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-full"
+            >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                <path d="M21 3v5h-5"/>
+                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                <path d="M3 21v-5h5"/>
+              </svg>
+              New Game
+            </Button>
+          </div>
+        </section>
+      );
+    }
+
+    // Memory Game Component
+    function MemoryGame({ onBack }) {
+      const [cards, setCards] = useState([]);
+      const [flippedCards, setFlippedCards] = useState([]);
+      const [moves, setMoves] = useState(0);
+      const [matches, setMatches] = useState(0);
+      const [gameWon, setGameWon] = useState(false);
+
+      const cardValues = ["🎮", "🎯", "🎨", "🎪", "🎭", "🎸", "🎺", "🎹"];
+
+      const initializeGame = () => {
+        const shuffledCards = [...cardValues, ...cardValues]
+          .sort(() => Math.random() - 0.5)
+          .map((value, index) => ({
+            id: index,
+            value,
+            isFlipped: false,
+            isMatched: false,
+          }));
+
+        setCards(shuffledCards);
+        setFlippedCards([]);
+        setMoves(0);
+        setMatches(0);
+        setGameWon(false);
+      };
+
+      const handleCardClick = (cardId) => {
+        if (flippedCards.length === 2 || cards[cardId].isFlipped || cards[cardId].isMatched) return;
+
+        const newCards = [...cards];
+        newCards[cardId].isFlipped = true;
+        setCards(newCards);
+
+        const newFlippedCards = [...flippedCards, cardId];
+        setFlippedCards(newFlippedCards);
+
+        if (newFlippedCards.length === 2) {
+          setMoves(moves + 1);
+          const [firstCard, secondCard] = newFlippedCards;
+
+          if (cards[firstCard].value === cards[secondCard].value) {
+            setTimeout(() => {
+              const matchedCards = [...cards];
+              matchedCards[firstCard].isMatched = true;
+              matchedCards[secondCard].isMatched = true;
+              setCards(matchedCards);
+              setMatches(matches + 1);
+              setFlippedCards([]);
+
+              if (matches + 1 === cardValues.length) {
+                setGameWon(true);
+              }
+            }, 1000);
+          } else {
+            setTimeout(() => {
+              const resetCards = [...cards];
+              resetCards[firstCard].isFlipped = false;
+              resetCards[secondCard].isFlipped = false;
+              setCards(resetCards);
+              setFlippedCards([]);
+            }, 1000);
+          }
+        }
+      };
+
+      useEffect(() => {
+        initializeGame();
+      }, []);
+
+      return (
+        <section className="flex flex-col items-center justify-center min-h-screen px-4">
+          <div className="glass-box max-w-2xl w-full">
+            <div className="flex justify-between items-center mb-6">
+              <Button onClick={onBack} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                ← Back
+              </Button>
+              <h2 className="text-2xl font-bold text-white">Memory Game</h2>
+              <Button onClick={initializeGame} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                  <path d="M21 3v5h-5"/>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                  <path d="M3 21v-5h5"/>
+                </svg>
+                Reset
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4 mb-6 text-center">
+              <div>
+                <div className="text-2xl font-bold text-white">{moves}</div>
+                <div className="text-white/80 text-sm">Moves</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-white">{matches}/{cardValues.length}</div>
+                <div className="text-white/80 text-sm">Matches</div>
+              </div>
+            </div>
+
+            {gameWon && (
+              <div className="text-center mb-6 p-4 bg-green-500/20 border border-green-400/30 rounded-xl">
+                <div className="text-4xl mb-2">🎉</div>
+                <div className="text-xl font-bold text-white mb-2">Congratulations!</div>
+                <div className="text-white/80">You completed the game in {moves} moves!</div>
+              </div>
+            )}
+
+            <div className="grid grid-cols-4 gap-3 max-w-md mx-auto">
+              {cards.map((card) => (
+                <button
+                  key={card.id}
+                  onClick={() => handleCardClick(card.id)}
+                  className={`aspect-square rounded-xl text-3xl font-bold transition-all duration-300 flex items-center justify-center ${
+                    card.isFlipped || card.isMatched
+                      ? "bg-white/30 border-2 border-white/50 scale-105"
+                      : "bg-white/10 border-2 border-white/20 hover:bg-white/20 hover:scale-105"
+                  } ${card.isMatched ? "opacity-75" : ""}`}
+                  disabled={card.isFlipped || card.isMatched || flippedCards.length === 2}
+                >
+                  {card.isFlipped || card.isMatched ? card.value : "?"}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Hangman Game Component
+    function HangmanGame({ onBack }) {
+      const [currentWord, setCurrentWord] = useState("");
+      const [guessedLetters, setGuessedLetters] = useState([]);
+      const [wrongGuesses, setWrongGuesses] = useState(0);
+      const [gameWon, setGameWon] = useState(false);
+      const [gameOver, setGameOver] = useState(false);
+      const [score, setScore] = useState(0);
+
+      const MAX_WRONG_GUESSES = 6;
+
+      const wordBank = [
+        "COMPUTER", "RAINBOW", "ELEPHANT", "MOUNTAIN", "BUTTERFLY", 
+        "KEYBOARD", "SANDWICH", "UMBRELLA", "JAVASCRIPT", "PROGRAMMING"
+      ];
+
+      const hangmanStages = [
+        `\n   ____\n   |  |\n   |\n   |\n   |\n  ___`,
+        `\n   ____\n   |  |\n   |  O\n   |\n   |\n  ___`,
+        `\n   ____\n   |  |\n   |  O\n   |  |\n   |\n  ___`,
+        `\n   ____\n   |  |\n   |  O\n   | /|\n   |\n  ___`,
+        `\n   ____\n   |  |\n   |  O\n   | /|\\\n   |\n  ___`,
+        `\n   ____\n   |  |\n   |  O\n   | /|\\\n   | /\n  ___`,
+        `\n   ____\n   |  |\n   |  O\n   | /|\\\n   | / \\\n  ___`,
+      ];
+
+      const getRandomWord = () => {
+        return wordBank[Math.floor(Math.random() * wordBank.length)];
+      };
+
+      const getDisplayWord = () =>
+        currentWord
+          .split("")
+          .map((l) => (guessedLetters.includes(l) ? l : "_"))
+          .join(" ");
+
+      const startNewGame = () => {
+        setCurrentWord(getRandomWord());
+        setGuessedLetters([]);
+        setWrongGuesses(0);
+        setGameWon(false);
+        setGameOver(false);
+      };
+
+      const guessLetter = (letter) => {
+        if (guessedLetters.includes(letter) || gameOver || gameWon) return;
+
+        setGuessedLetters((prev) => [...prev, letter]);
+
+        if (currentWord.includes(letter)) {
+          const completed = currentWord.split("").every((c) => [...guessedLetters, letter].includes(c));
+          if (completed) {
+            setGameWon(true);
+            setScore((s) => s + 10 + Math.max(0, (MAX_WRONG_GUESSES - wrongGuesses) * 5));
+          }
+        } else {
+          setWrongGuesses((w) => {
+            const next = w + 1;
+            if (next >= MAX_WRONG_GUESSES) setGameOver(true);
+            return next;
+          });
+        }
+      };
+
+      useEffect(() => startNewGame(), []);
+
+      useEffect(() => {
+        const keyHandler = (e) => {
+          const l = e.key.toUpperCase();
+          if (l >= "A" && l <= "Z") {
+            e.preventDefault();
+            guessLetter(l);
+          }
+        };
+        window.addEventListener("keydown", keyHandler);
+        return () => window.removeEventListener("keydown", keyHandler);
+      }, [guessedLetters, gameOver, gameWon, currentWord, wrongGuesses]);
+
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+      return (
+        <section className="flex flex-col items-center justify-center min-h-screen px-4">
+          <div className="glass-box max-w-2xl w-full">
+            <div className="flex justify-between items-center mb-6">
+              <Button onClick={onBack} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                ← Back
+              </Button>
+              <h2 className="text-2xl font-bold text-white">Hangman</h2>
+              <Button onClick={startNewGame} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                  <path d="M21 3v5h-5"/>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                  <path d="M3 21v-5h5"/>
+                </svg>
+                New Word
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-6 text-center">
+              <div>
+                <div className="text-2xl font-bold text-white">{score}</div>
+                <div className="text-white/80 text-sm">Score</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-red-300">{wrongGuesses}/{MAX_WRONG_GUESSES}</div>
+                <div className="text-white/80 text-sm">Wrong</div>
+              </div>
+            </div>
+
+            <div className="text-center mb-6">
+              <pre className="text-white font-mono text-sm bg-black/20 p-4 rounded-xl inline-block">
+                {hangmanStages[wrongGuesses]}
+              </pre>
+            </div>
+
+            <div className="text-center mb-6">
+              <div className="text-4xl font-bold text-white tracking-widest mb-4">{getDisplayWord()}</div>
+              <div className="text-white/60 text-sm">Category: General ({currentWord.length} letters)</div>
+            </div>
+
+            {gameWon && (
+              <div className="text-center mb-6 p-4 bg-green-500/20 border border-green-400/30 rounded-xl">
+                <div className="text-4xl mb-2">🎉</div>
+                <div className="text-xl font-bold text-white mb-2">Congratulations!</div>
+                <div className="text-white/80">You guessed "{currentWord}" correctly!</div>
+              </div>
+            )}
+
+            {gameOver && (
+              <div className="text-center mb-6 p-4 bg-red-500/20 border border-red-400/30 rounded-xl">
+                <div className="text-4xl mb-2">💀</div>
+                <div className="text-xl font-bold text-white mb-2">Game Over!</div>
+                <div className="text-white/80">The word was: <span className="font-bold text-red-300">"{currentWord}"</span></div>
+              </div>
+            )}
+
+            <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-2 mb-4">
+              {alphabet.map((letter) => {
+                const isGuessed = guessedLetters.includes(letter);
+                const isCorrect = isGuessed && currentWord.includes(letter);
+                const isWrong = isGuessed && !currentWord.includes(letter);
+
+                return (
+                  <Button
+                    key={letter}
+                    onClick={() => guessLetter(letter)}
+                    disabled={isGuessed || gameOver || gameWon}
+                    className={`aspect-square text-sm font-bold transition-all duration-200 ${
+                      isCorrect
+                        ? "bg-green-500/40 border-green-400/50 text-green-200"
+                        : isWrong
+                          ? "bg-red-500/40 border-red-400/50 text-red-200"
+                          : "bg-white/20 border-white/30 text-white hover:bg-white/30 hover:scale-105"
+                    } backdrop-blur-sm border rounded-lg disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    {letter}
+                  </Button>
+                );
+              })}
+            </div>
+
+            <div className="text-center text-white/60 text-sm">Click letters or use your keyboard to guess the word!</div>
+          </div>
+        </section>
+      );
+    }
+
+    // Math Game Component
+    function MathGame({ onBack }) {
+      const [currentQuestion, setCurrentQuestion] = useState({ question: "", answer: 0 });
+      const [userAnswer, setUserAnswer] = useState("");
+      const [score, setScore] = useState(0);
+      const [questionCount, setQuestionCount] = useState(0);
+      const [gameOver, setGameOver] = useState(false);
+      const [streak, setStreak] = useState(0);
+
+      const generateQuestion = () => {
+        const operations = ["+", "-", "*", "/"];
+        const operation = operations[Math.floor(Math.random() * operations.length)];
+
+        let num1, num2, answer, question;
+
+        switch (operation) {
+          case "+":
+            num1 = Math.floor(Math.random() * 50) + 1;
+            num2 = Math.floor(Math.random() * 50) + 1;
+            answer = num1 + num2;
+            question = `${num1} + ${num2}`;
+            break;
+          case "-":
+            num1 = Math.floor(Math.random() * 50) + 20;
+            num2 = Math.floor(Math.random() * num1) + 1;
+            answer = num1 - num2;
+            question = `${num1} - ${num2}`;
+            break;
+          case "*":
+            num1 = Math.floor(Math.random() * 12) + 1;
+            num2 = Math.floor(Math.random() * 12) + 1;
+            answer = num1 * num2;
+            question = `${num1} × ${num2}`;
+            break;
+          case "/":
+            answer = Math.floor(Math.random() * 12) + 1;
+            num2 = Math.floor(Math.random() * 12) + 1;
+            num1 = answer * num2;
+            question = `${num1} ÷ ${num2}`;
+            break;
+          default:
+            num1 = 1;
+            num2 = 1;
+            answer = 2;
+            question = "1 + 1";
+        }
+
+        setCurrentQuestion({ question, answer });
+      };
+
+      const startGame = () => {
+        setScore(0);
+        setQuestionCount(0);
+        setGameOver(false);
+        setStreak(0);
+        setUserAnswer("");
+        generateQuestion();
+      };
+
+      const submitAnswer = () => {
+        const isCorrect = parseInt(userAnswer) === currentQuestion.answer;
+
+        if (isCorrect) {
+          setScore(score + 10 + streak * 2);
+          setStreak(streak + 1);
+        } else {
+          setStreak(0);
+        }
+
+        setQuestionCount(questionCount + 1);
+        setUserAnswer("");
+
+        if (questionCount + 1 >= 10) {
+          setGameOver(true);
+        } else {
+          generateQuestion();
+        }
+      };
+
+      const handleKeyPress = (e) => {
+        if (e.key === "Enter" && userAnswer.trim() !== "") {
+          submitAnswer();
+        }
+      };
+
+      // Generate first question when component mounts
+      useEffect(() => {
+        generateQuestion();
+      }, []);
+
+      return (
+        <section className="flex flex-col items-center justify-center min-h-screen px-4">
+          <div className="glass-box max-w-lg w-full">
+            <div className="flex justify-between items-center mb-6">
+              <Button onClick={onBack} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                ← Back
+              </Button>
+              <h2 className="text-2xl font-bold text-white">Math Game</h2>
+              <Button onClick={startGame} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                  <path d="M21 3v5h-5"/>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                  <path d="M3 21v-5h5"/>
+                </svg>
+                New Game
+              </Button>
+            </div>
+
+            {!gameOver && (
+              <>
+                <div className="grid grid-cols-3 gap-4 mb-6 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-white">{score}</div>
+                    <div className="text-white/80 text-sm">Score</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-white">{questionCount}/10</div>
+                    <div className="text-white/80 text-sm">Questions</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-purple-300">{streak}</div>
+                    <div className="text-white/80 text-sm">Streak</div>
+                  </div>
+                </div>
+
+                {streak >= 3 && (
+                  <div className="text-center mb-4 p-2 bg-purple-500/20 border border-purple-400/30 rounded-lg">
+                    <div className="text-purple-300 font-bold">🔥 {streak} Streak! +{streak * 2} Bonus Points!</div>
+                  </div>
+                )}
+
+                <div className="text-center mb-6">
+                  <div className="text-4xl font-bold text-white mb-4">{currentQuestion.question} = ?</div>
+                  <input
+                    type="number"
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    className="w-32 bg-white/20 border border-white/30 rounded-lg px-4 py-3 text-white text-center text-xl font-bold placeholder-white/50"
+                    placeholder="?"
+                    autoFocus
+                  />
+                </div>
+
+                <Button
+                  onClick={submitAnswer}
+                  disabled={userAnswer.trim() === ""}
+                  className="w-full bg-green-500/30 hover:bg-green-500/40 text-white border border-green-400/30 py-3 text-lg disabled:opacity-50"
+                >
+                  Submit Answer
+                </Button>
+              </>
+            )}
+
+            {gameOver && (
+              <div className="text-center">
+                <div className="text-6xl mb-4">{score >= 200 ? "🏆" : score >= 100 ? "🎉" : "📊"}</div>
+                <h3 className="text-2xl font-bold text-white mb-4">Game Complete!</h3>
+                <div className="space-y-2 mb-6">
+                  <div className="text-lg text-white">
+                    Final Score: <span className="font-bold text-green-300">{score}</span>
+                  </div>
+                  <div className="text-lg text-white">
+                    Questions: <span className="font-bold">{questionCount}/10</span>
+                  </div>
+                </div>
+                <Button
+                  onClick={startGame}
+                  className="bg-blue-500/30 hover:bg-blue-500/40 text-white border border-blue-400/30 px-8 py-3"
+                >
+                  Play Again
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    // Meditation Timer Component
+    function MeditationTimer({ onBack }) {
+      const [duration, setDuration] = useState(5);
+      const [timeLeft, setTimeLeft] = useState(0);
+      const [isActive, setIsActive] = useState(false);
+      const [isCompleted, setIsCompleted] = useState(false);
+      const [selectedSound, setSelectedSound] = useState("rain");
+
+      const sounds = [
+        { id: "rain", name: "Rain", emoji: "🌧️" },
+        { id: "ocean", name: "Ocean Waves", emoji: "🌊" },
+        { id: "forest", name: "Forest", emoji: "🌲" },
+        { id: "silence", name: "Silence", emoji: "🤫" },
+      ];
+
+      const durations = [1, 5, 10, 15, 20, 30, 45, 60];
+
+      const startTimer = () => {
+        setTimeLeft(duration * 60);
+        setIsActive(true);
+        setIsCompleted(false);
+      };
+
+      const pauseTimer = () => {
+        setIsActive(false);
+      };
+
+      const resetTimer = () => {
+        setIsActive(false);
+        setTimeLeft(0);
+        setIsCompleted(false);
+      };
+
+      useEffect(() => {
+        let interval = null;
+        if (isActive && timeLeft > 0) {
+          interval = setInterval(() => {
+            setTimeLeft((time) => {
+              if (time <= 1) {
+                setIsActive(false);
+                setIsCompleted(true);
+                return 0;
+              }
+              return time - 1;
+            });
+          }, 1000);
+        }
+        return () => {
+          if (interval) clearInterval(interval);
+        };
+      }, [isActive, timeLeft]);
+
+      const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+      };
+
+      const progress = duration * 60 > 0 ? ((duration * 60 - timeLeft) / (duration * 60)) * 100 : 0;
+
+      useEffect(() => {
+        if (isCompleted) {
+          try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.frequency.setValueAtTime(528, audioContext.currentTime);
+            oscillator.type = "sine";
+            gainNode.gain.value = 0.3;
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            oscillator.start();
+
+            setTimeout(() => oscillator.stop(), 1000);
+          } catch (error) {
+            console.log("Meditation complete! 🧘‍♀️");
+          }
+        }
+      }, [isCompleted]);
+
+      return (
+        <section className="flex flex-col items-center justify-center min-h-screen px-4">
+          <div className="glass-box max-w-lg w-full text-center">
+            <div className="flex justify-between items-center mb-6">
+              <Button onClick={onBack} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                ← Back
+              </Button>
+              <h2 className="text-2xl font-bold text-white">Meditation Timer</h2>
+              <div className="w-16" />
+            </div>
+
+            {isCompleted && (
+              <div className="mb-6 p-4 bg-green-500/20 border border-green-400/30 rounded-xl">
+                <div className="text-4xl mb-2">🧘‍♀️</div>
+                <div className="text-xl font-bold text-white mb-2">Session Complete!</div>
+                <div className="text-white/80">Great job on your {duration}-minute meditation!</div>
+              </div>
+            )}
+
+            {!isActive && timeLeft === 0 && !isCompleted && (
+              <>
+                <div className="mb-6">
+                  <div className="text-6xl mb-4">🧘‍♀️</div>
+                  <h3 className="text-xl font-bold text-white mb-4">Set Your Session</h3>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-white font-semibold mb-3">Duration (minutes)</h4>
+                  <div className="grid grid-cols-4 gap-2">
+                    {durations.map((dur) => (
+                      <Button
+                        key={dur}
+                        onClick={() => setDuration(dur)}
+                        className={`${
+                          duration === dur
+                            ? "bg-blue-500/40 border-blue-400/50"
+                            : "bg-white/20 border-white/30 hover:bg-white/30"
+                        } backdrop-blur-sm border text-white`}
+                      >
+                        {dur}m
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-white font-semibold mb-3">Background Sound</h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {sounds.map((sound) => (
+                      <Button
+                        key={sound.id}
+                        onClick={() => setSelectedSound(sound.id)}
+                        className={`${
+                          selectedSound === sound.id
+                            ? "bg-purple-500/40 border-purple-400/50"
+                            : "bg-white/20 border-white/30 hover:bg-white/30"
+                        } backdrop-blur-sm border text-white`}
+                      >
+                        {sound.emoji} {sound.name}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                <Button
+                  onClick={startTimer}
+                  className="w-full bg-green-500/30 hover:bg-green-500/40 text-white border border-green-400/30 py-3 text-lg"
+                >
+                  Start Meditation
+                </Button>
+              </>
+            )}
+
+            {(isActive || timeLeft > 0) && !isCompleted && (
+              <>
+                <div className="mb-6">
+                  <div className="relative w-48 h-48 mx-auto mb-6">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                      <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" strokeWidth="8" fill="none" />
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        stroke="rgba(34, 197, 94, 0.8)"
+                        strokeWidth="8"
+                        fill="none"
+                        strokeDasharray={`${2 * Math.PI * 45}`}
+                        strokeDashoffset={`${2 * Math.PI * 45 * (1 - progress / 100)}`}
+                        className="transition-all duration-1000"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-4xl font-bold text-white">{formatTime(timeLeft)}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 mb-4">
+                  <Button
+                    onClick={isActive ? pauseTimer : startTimer}
+                    className="flex-1 bg-blue-500/30 hover:bg-blue-500/40 text-white border border-blue-400/30"
+                  >
+                    {isActive ? (
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="6" y="4" width="4" height="16"/>
+                        <rect x="14" y="4" width="4" height="16"/>
+                      </svg>
+                    ) : (
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <polygon points="5,3 19,12 5,21"/>
+                      </svg>
+                    )}
+                    {isActive ? "Pause" : "Resume"}
+                  </Button>
+                  <Button
+                    onClick={resetTimer}
+                    className="flex-1 bg-red-500/30 hover:bg-red-500/40 text-white border border-red-400/30"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                      <path d="M21 3v5h-5"/>
+                      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                      <path d="M3 21v-5h5"/>
+                    </svg>
+                    Reset
+                  </Button>
+                </div>
+
+                <div className="text-white/60 text-sm">
+                  {selectedSound !== "silence" && `🎵 Playing: ${sounds.find((s) => s.id === selectedSound)?.name}`}
+                </div>
+              </>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    // Breathing Exercise Component
+    function BreathingExercise({ onBack }) {
+      const [isActive, setIsActive] = useState(false);
+      const [phase, setPhase] = useState("inhale");
+      const [count, setCount] = useState(0);
+      const [cycles, setCycles] = useState(0);
+      const [technique, setTechnique] = useState("4-7-8");
+
+      const techniques = {
+        "4-7-8": { inhale: 4, hold: 7, exhale: 8, pause: 0 },
+        "4-4-4": { inhale: 4, hold: 4, exhale: 4, pause: 0 },
+        "6-2-6": { inhale: 6, hold: 2, exhale: 6, pause: 2 },
+      };
+
+      const currentTechnique = techniques[technique];
+
+      const startExercise = () => {
+        setIsActive(true);
+        setPhase("inhale");
+        setCount(0);
+        setCycles(0);
+      };
+
+      const stopExercise = () => {
+        setIsActive(false);
+        setPhase("inhale");
+        setCount(0);
+      };
+
+      useEffect(() => {
+        if (!isActive) return;
+
+        const interval = setInterval(() => {
+          setCount((prevCount) => {
+            const newCount = prevCount + 1;
+            const maxCount = currentTechnique[phase];
+
+            if (newCount >= maxCount) {
+              if (phase === "inhale") {
+                setPhase(currentTechnique.hold > 0 ? "hold" : "exhale");
+              } else if (phase === "hold") {
+                setPhase("exhale");
+              } else if (phase === "exhale") {
+                if (currentTechnique.pause > 0) {
+                  setPhase("pause");
+                } else {
+                  setPhase("inhale");
+                  setCycles((c) => c + 1);
+                }
+              } else if (phase === "pause") {
+                setPhase("inhale");
+                setCycles((c) => c + 1);
+              }
+              return 0;
+            }
+            return newCount;
+          });
+        }, 1000);
+
+        return () => clearInterval(interval);
+      }, [isActive, phase, currentTechnique]);
+
+      const getPhaseText = () => {
+        switch (phase) {
+          case "inhale": return "Breathe In";
+          case "hold": return "Hold";
+          case "exhale": return "Breathe Out";
+          case "pause": return "Pause";
+        }
+      };
+
+      const getPhaseColor = () => {
+        switch (phase) {
+          case "inhale": return "text-blue-300";
+          case "hold": return "text-yellow-300";
+          case "exhale": return "text-green-300";
+          case "pause": return "text-purple-300";
+        }
+      };
+
+      const getCircleScale = () => {
+        const progress = count / currentTechnique[phase];
+        switch (phase) {
+          case "inhale": return 1 + progress * 0.5;
+          case "exhale": return 1.5 - progress * 0.5;
+          default: return 1.5;
+        }
+      };
+
+      return (
+        <section className="flex flex-col items-center justify-center min-h-screen px-4">
+          <div className="glass-box max-w-lg w-full text-center">
+            <div className="flex justify-between items-center mb-6">
+              <Button onClick={onBack} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                ← Back
+              </Button>
+              <h2 className="text-2xl font-bold text-white">Breathing Exercise</h2>
+              <div className="w-16" />
+            </div>
+
+            {!isActive && (
+              <>
+                <div className="mb-6">
+                  <div className="text-6xl mb-4">🌊</div>
+                  <h3 className="text-xl font-bold text-white mb-4">Choose Your Technique</h3>
+                </div>
+
+                <div className="mb-6">
+                  <div className="space-y-3">
+                    {Object.entries(techniques).map(([key, tech]) => (
+                      <Button
+                        key={key}
+                        onClick={() => setTechnique(key)}
+                        className={`w-full ${
+                          technique === key
+                            ? "bg-blue-500/40 border-blue-400/50"
+                            : "bg-white/20 border-white/30 hover:bg-white/30"
+                        } backdrop-blur-sm border text-white`}
+                      >
+                        <div className="text-left">
+                          <div className="font-semibold">{key} Technique</div>
+                          <div className="text-sm opacity-80">
+                            Inhale {tech.inhale}s{tech.hold > 0 && ` • Hold ${tech.hold}s`}• Exhale {tech.exhale}s
+                            {tech.pause > 0 && ` • Pause ${tech.pause}s`}
+                          </div>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                <Button
+                  onClick={startExercise}
+                  className="w-full bg-green-500/30 hover:bg-green-500/40 text-white border border-green-400/30 py-3 text-lg"
+                >
+                  Start Breathing
+                </Button>
+              </>
+            )}
+
+            {isActive && (
+              <>
+                <div className="mb-6">
+                  <div className="relative w-48 h-48 mx-auto mb-6 flex items-center justify-center">
+                    <div
+                      className="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400/30 to-green-400/30 border-2 border-white/30 transition-transform duration-1000 ease-in-out flex items-center justify-center"
+                      style={{ transform: `scale(${getCircleScale()})` }}
+                    >
+                      <div className="text-white/80 text-sm font-medium">{currentTechnique[phase] - count}</div>
+                    </div>
+                  </div>
+                  <div className={`text-3xl font-bold mb-2 ${getPhaseColor()}`}>{getPhaseText()}</div>
+                  <div className="text-white/60">
+                    Cycle {cycles + 1} • {technique} Technique
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <Button
+                    onClick={stopExercise}
+                    className="flex-1 bg-red-500/30 hover:bg-red-500/40 text-white border border-red-400/30"
+                  >
+                    Stop Exercise
+                  </Button>
+                </div>
+
+                {cycles >= 5 && (
+                  <div className="mt-4 p-3 bg-green-500/20 border border-green-400/30 rounded-lg">
+                    <div className="text-green-300 text-sm">🌟 Great job! You've completed {cycles} breathing cycles.</div>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    // Focus Sounds Component
+    function FocusSounds({ onBack }) {
+      const [currentSound, setCurrentSound] = useState(null);
+      const [volume, setVolume] = useState(50);
+      const [isPlaying, setIsPlaying] = useState(false);
+
+      const sounds = [
+        { id: "lofi", name: "Lofi Hip Hop", emoji: "🎵", description: "Chill beats for studying" },
+        { id: "rain", name: "Rain Sounds", emoji: "🌧️", description: "Gentle rainfall" },
+        { id: "ocean", name: "Ocean Waves", emoji: "🌊", description: "Calming sea sounds" },
+        { id: "forest", name: "Forest Ambience", emoji: "🌲", description: "Birds and nature" },
+        { id: "cafe", name: "Coffee Shop", emoji: "☕", description: "Ambient cafe chatter" },
+        { id: "fireplace", name: "Fireplace", emoji: "🔥", description: "Crackling fire" },
+        { id: "white-noise", name: "White Noise", emoji: "📻", description: "Pure white noise" },
+        { id: "pink-noise", name: "Pink Noise", emoji: "🎧", description: "Softer than white noise" },
+      ];
+
+      const stopAllSounds = () => {
+        setCurrentSound(null);
+        setIsPlaying(false);
+      };
+
+      const playSound = async (soundId) => {
+        try {
+          if (currentSound === soundId && isPlaying) {
+            stopAllSounds();
+            return;
+          }
+
+          stopAllSounds();
+
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+
+          setCurrentSound(soundId);
+          setIsPlaying(true);
+
+          alert(`🎵 ${sounds.find((s) => s.id === soundId)?.name} audio is now simulated!
+
+Note: Your browser may have blocked audio autoplay. Try clicking the sound again, or check your browser's audio settings.
+
+For the best experience, interact with the page first (click anywhere) then try the sounds.`);
+        } catch (error) {
+          console.error("Error playing audio:", error);
+        }
+      };
+
+      return (
+        <section className="flex flex-col items-center justify-center min-h-screen px-4">
+          <div className="glass-box max-w-2xl w-full">
+            <div className="flex justify-between items-center mb-6">
+              <Button onClick={onBack} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                ← Back
+              </Button>
+              <h2 className="text-2xl font-bold text-white">Focus Sounds</h2>
+              <Button onClick={stopAllSounds} className="bg-red-500/30 hover:bg-red-500/40 text-white border border-red-400/30">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Stop All
+              </Button>
+            </div>
+
+            {currentSound && isPlaying && (
+              <div className="mb-6 p-4 bg-blue-500/20 border border-blue-400/30 rounded-xl">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center">
+                    <div className="text-2xl mr-3">{sounds.find((s) => s.id === currentSound)?.emoji}</div>
+                    <div>
+                      <div className="text-white font-semibold">
+                        Now Playing: {sounds.find((s) => s.id === currentSound)?.name}
+                      </div>
+                      <div className="text-white/60 text-sm">{sounds.find((s) => s.id === currentSound)?.description}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <svg className="w-4 h-4 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <polygon points="11,5 6,9 2,9 2,15 6,15 11,19 11,5"/>
+                    </svg>
+                    <div className="text-white text-sm">{volume}%</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-white/60 text-sm">Volume:</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={volume}
+                    onChange={(e) => setVolume(Number(e.target.value))}
+                    className="flex-1 h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="mb-6 p-4 bg-yellow-500/20 border border-yellow-400/30 rounded-xl">
+              <div className="text-yellow-300 text-sm text-center">
+                🔊 <strong>Audio Tips:</strong> Click anywhere on the page first, then try the sounds. Some browsers require
+                user interaction before playing audio.
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {sounds.map((sound) => (
+                <div
+                  key={sound.id}
+                  onClick={() => playSound(sound.id)}
+                  className={`glass-box cursor-pointer transition-all duration-300 ${
+                    currentSound === sound.id && isPlaying
+                      ? "bg-blue-500/20 border-blue-400/50 scale-105"
+                      : "hover:scale-105"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <div className="text-3xl mr-4">{sound.emoji}</div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-white mb-1">{sound.name}</h3>
+                      <p className="text-white/60 text-sm">{sound.description}</p>
+                    </div>
+                    <div className="ml-4">
+                      {currentSound === sound.id && isPlaying ? (
+                        <svg className="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <rect x="6" y="4" width="4" height="16"/>
+                          <rect x="14" y="4" width="4" height="16"/>
+                        </svg>
+                      ) : (
+                        <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <polygon points="5,3 19,12 5,21"/>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 p-4 bg-green-500/20 border border-green-400/30 rounded-xl">
+              <div className="text-green-300 text-sm text-center">
+                💡 <strong>Tip:</strong> These are procedurally generated sounds. For real audio files, you would replace
+                the sound generation with actual audio file URLs.
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Pomodoro Timer Component
+    function PomodoroTimer({ onBack }) {
+      const [workTime, setWorkTime] = useState(25);
+      const [breakTime, setBreakTime] = useState(5);
+      const [longBreakTime, setLongBreakTime] = useState(15);
+      const [currentTime, setCurrentTime] = useState(25 * 60);
+      const [isActive, setIsActive] = useState(false);
+      const [mode, setMode] = useState("work");
+      const [completedPomodoros, setCompletedPomodoros] = useState(0);
+      const [totalPomodoros, setTotalPomodoros] = useState(0);
+      const clockHandRef = useRef(null);
+      const prevModeRef = useRef(mode);
+
+      const startTimer = () => {
+        setIsActive(true);
+        // Animate clock hand on start
+        if (clockHandRef.current && window.anime) {
+          window.anime({
+            targets: clockHandRef.current,
+            rotate: [
+              { value: '+=20', duration: 200, easing: 'easeInOutSine' },
+              { value: '-=20', duration: 200, easing: 'easeInOutSine' }
+            ],
+          });
+        }
+      };
+
+      const pauseTimer = () => {
+        setIsActive(false);
+      };
+
+      const resetTimer = () => {
+        setIsActive(false);
+        setCurrentTime(workTime * 60);
+        setMode("work");
+        // Animate clock hand on reset
+        if (clockHandRef.current && window.anime) {
+          window.anime({
+            targets: clockHandRef.current,
+            rotate: [
+              { value: '+=360', duration: 600, easing: 'easeInOutCubic' }
+            ],
+          });
+        }
+      };
+
+      const skipSession = () => {
+        if (mode === "work") {
+          setCompletedPomodoros((prev) => prev + 1);
+          setTotalPomodoros((prev) => prev + 1);
+
+          if ((completedPomodoros + 1) % 4 === 0) {
+            setMode("longBreak");
+            setCurrentTime(longBreakTime * 60);
+          } else {
+            setMode("break");
+            setCurrentTime(breakTime * 60);
+          }
+        } else {
+          setMode("work");
+          setCurrentTime(workTime * 60);
+        }
+        setIsActive(false);
+      };
+
+      useEffect(() => {
+        let interval = null;
+        if (isActive && currentTime > 0) {
+          interval = setInterval(() => {
+            setCurrentTime((time) => {
+              if (time <= 1) {
+                if (mode === "work") {
+                  setCompletedPomodoros((prev) => prev + 1);
+                  setTotalPomodoros((prev) => prev + 1);
+
+                  if ((completedPomodoros + 1) % 4 === 0) {
+                    setMode("longBreak");
+                    return longBreakTime * 60;
+                  } else {
+                    setMode("break");
+                    return breakTime * 60;
+                  }
+                } else {
+                  setMode("work");
+                  return workTime * 60;
+                }
+              }
+              return time - 1;
+            });
+          }, 1000);
+        }
+        return () => {
+          if (interval) clearInterval(interval);
+        };
+      }, [isActive, currentTime, mode, workTime, breakTime, longBreakTime, completedPomodoros]);
+
+      const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+      };
+
+      const getModeInfo = () => {
+        switch (mode) {
+          case "work":
+            return { title: "Focus Time", color: "text-red-300", bgColor: "bg-red-500/20 border-red-400/30", emoji: "⏱️" };
+          case "break":
+            return {
+              title: "Short Break",
+              color: "text-green-300",
+              bgColor: "bg-green-500/20 border-green-400/30",
+              emoji: "☕",
+            };
+          case "longBreak":
+            return {
+              title: "Long Break",
+              color: "text-blue-300",
+              bgColor: "bg-blue-500/20 border-blue-400/30",
+              emoji: "🌟",
+            };
+        }
+      };
+
+      const modeInfo = getModeInfo();
+      const progress =
+        mode === "work"
+          ? ((workTime * 60 - currentTime) / (workTime * 60)) * 100
+          : mode === "break"
+            ? ((breakTime * 60 - currentTime) / (breakTime * 60)) * 100
+            : ((longBreakTime * 60 - currentTime) / (longBreakTime * 60)) * 100;
+
+      return (
+        <section className="flex flex-col items-center justify-center min-h-screen px-4">
+          <div className="glass-box max-w-lg w-full text-center">
+            <div className="flex justify-between items-center mb-6">
+              <Button onClick={onBack} className="bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white">
+                ← Back
+              </Button>
+              <h2 className="text-2xl font-bold text-white">Pomodoro Timer</h2>
+              <div className="w-16" />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="glass-box">
+                <div className="text-2xl font-bold text-white">{completedPomodoros}</div>
+                <div className="text-white/80 text-sm">Today</div>
+              </div>
+              <div className="glass-box">
+                <div className="text-2xl font-bold text-white">{totalPomodoros}</div>
+                <div className="text-white/80 text-sm">Total</div>
+              </div>
+            </div>
+
+            <div className={`mb-6 p-4 rounded-xl ${modeInfo.bgColor}`}>
+              <div className="text-3xl mb-2">{modeInfo.emoji}</div>
+              <div className={`text-xl font-bold mb-2 ${modeInfo.color}`}>{modeInfo.title}</div>
+              <div className="text-white/80 text-sm">
+                Session {completedPomodoros + 1}
+                {mode === "work" && completedPomodoros > 0 && completedPomodoros % 4 === 3 && " (Long break next!)"}
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <div className="relative w-48 h-48 mx-auto mb-6">
+                {/* Background circle with pulsing effect */}
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                  <circle 
+                    cx="50" 
+                    cy="50" 
+                    r="45" 
+                    stroke="rgba(255,255,255,0.1)" 
+                    strokeWidth="8" 
+                    fill="none"
+                    className={isActive ? "animate-pulse" : ""}
+                  />
+                  
+                  {/* Progress circle with animated stroke */}
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke={
+                      mode === "work"
+                        ? "rgba(239, 68, 68, 0.8)"
+                        : mode === "break"
+                          ? "rgba(34, 197, 94, 0.8)"
+                          : "rgba(59, 130, 246, 0.8)"
+                    }
+                    strokeWidth="8"
+                    fill="none"
+                    strokeDasharray={`${2 * Math.PI * 45}`}
+                    strokeDashoffset={`${2 * Math.PI * 45 * (1 - progress / 100)}`}
+                    className="transition-all duration-300 ease-out"
+                    style={{
+                      filter: isActive ? "drop-shadow(0 0 8px currentColor)" : "none",
+                      transformOrigin: "center",
+                      animation: isActive ? "progressPulse 2s ease-in-out infinite" : "none"
+                    }}
+                  />
+                  
+                  {/* Animated dots around the circle */}
+                  {isActive && (
+                    <>
+                      <circle
+                        cx="50"
+                        cy="5"
+                        r="2"
+                        fill={mode === "work" ? "rgba(239, 68, 68, 0.8)" : mode === "break" ? "rgba(34, 197, 94, 0.8)" : "rgba(59, 130, 246, 0.8)"}
+                        className="animate-ping"
+                        style={{ animationDelay: "0s" }}
+                      />
+                      <circle
+                        cx="95"
+                        cy="50"
+                        r="2"
+                        fill={mode === "work" ? "rgba(239, 68, 68, 0.8)" : mode === "break" ? "rgba(34, 197, 94, 0.8)" : "rgba(59, 130, 246, 0.8)"}
+                        className="animate-ping"
+                        style={{ animationDelay: "0.5s" }}
+                      />
+                      <circle
+                        cx="50"
+                        cy="95"
+                        r="2"
+                        fill={mode === "work" ? "rgba(239, 68, 68, 0.8)" : mode === "break" ? "rgba(34, 197, 94, 0.8)" : "rgba(59, 130, 246, 0.8)"}
+                        className="animate-ping"
+                        style={{ animationDelay: "1s" }}
+                      />
+                      <circle
+                        cx="5"
+                        cy="50"
+                        r="2"
+                        fill={mode === "work" ? "rgba(239, 68, 68, 0.8)" : mode === "break" ? "rgba(34, 197, 94, 0.8)" : "rgba(59, 130, 246, 0.8)"}
+                        className="animate-ping"
+                        style={{ animationDelay: "1.5s" }}
+                      />
+                    </>
+                  )}
+                  {/* Clock face */}
+                  <circle cx="50" cy="50" r="36" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" strokeWidth="2" />
+                  {/* Clock hand (animated) */}
+                  {(() => {
+                    // Calculate hand angle: 0deg = top, 360deg = full session
+                    let total = 1;
+                    if (mode === "work") total = workTime * 60;
+                    else if (mode === "break") total = breakTime * 60;
+                    else if (mode === "longBreak") total = longBreakTime * 60;
+                    const elapsed = total - currentTime;
+                    const angle = (elapsed / total) * 360;
+                    // SVG rotation: 0deg is at 3 o'clock, so subtract 90deg to start at top
+                    const handAngle = angle - 90;
+                    return (
+                      <line
+                        ref={clockHandRef}
+                        x1="50"
+                        y1="50"
+                        x2="50"
+                        y2="18"
+                        stroke={mode === "work" ? "#ef4444" : mode === "break" ? "#22c55e" : "#3b82f6"}
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        transform={`rotate(${handAngle} 50 50)`}
+                        style={{
+                          transition: isActive ? "transform 1s cubic-bezier(0.77,0,0.18,1)" : "none"
+                        }}
+                      />
+                    );
+                  })()}
+                </svg>
+                {/* Time display with breathing effect */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div 
+                    className={`text-4xl font-bold text-white transition-all duration-300 ${
+                      isActive ? "animate-pulse" : ""
+                    }`}
+                    style={{
+                      textShadow: isActive ? "0 0 10px rgba(255,255,255,0.5)" : "none",
+                      transform: isActive ? "scale(1.05)" : "scale(1)"
+                    }}
+                  >
+                    {formatTime(currentTime)}
+                  </div>
+                </div>
+                {/* Rotating ring effect when active */}
+                {isActive && (
+                  <div 
+                    className="absolute inset-0 rounded-full border-2 border-white/20"
+                    style={{
+                      animation: "rotate 10s linear infinite",
+                      borderColor: mode === "work" ? "rgba(239, 68, 68, 0.3)" : mode === "break" ? "rgba(34, 197, 94, 0.3)" : "rgba(59, 130, 246, 0.3)"
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className="flex gap-3 mb-6">
+              <Button
+                onClick={isActive ? pauseTimer : startTimer}
+                className="flex-1 bg-blue-500/30 hover:bg-blue-500/40 text-white border border-blue-400/30"
+              >
+                {isActive ? (
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="6" y="4" width="4" height="16"/>
+                    <rect x="14" y="4" width="4" height="16"/>
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <polygon points="5,3 19,12 5,21"/>
+                  </svg>
+                )}
+                {isActive ? "Pause" : "Start"}
+              </Button>
+              <Button
+                onClick={resetTimer}
+                className="bg-gray-500/30 hover:bg-gray-500/40 text-white border border-gray-400/30 px-4"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                  <path d="M21 3v5h-5"/>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                  <path d="M3 21v-5h5"/>
+                </svg>
+              </Button>
+              <Button
+                onClick={skipSession}
+                className="bg-yellow-500/30 hover:bg-yellow-500/40 text-white border border-yellow-400/30 px-4"
+              >
+                Skip
+              </Button>
+            </div>
+
+            {!isActive && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-3 gap-3 text-sm">
+                  <div>
+                    <label className="block text-white/80 mb-1">Work</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="60"
+                      value={workTime}
+                      onChange={(e) => {
+                        const newTime = Number(e.target.value);
+                        setWorkTime(newTime);
+                        if (mode === "work") setCurrentTime(newTime * 60);
+                      }}
+                      className="w-full bg-white/20 border border-white/30 rounded px-2 py-1 text-white text-center"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white/80 mb-1">Break</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="30"
+                      value={breakTime}
+                      onChange={(e) => setBreakTime(Number(e.target.value))}
+                      className="w-full bg-white/20 border border-white/30 rounded px-2 py-1 text-white text-center"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white/80 mb-1">Long Break</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="60"
+                      value={longBreakTime}
+                      onChange={(e) => setLongBreakTime(Number(e.target.value))}
+                      className="w-full bg-white/20 border border-white/30 rounded px-2 py-1 text-white text-center"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    // AI Chat Component with Gemini Integration
+    function AIChat({ onBack }) {
+      // Shared memory for all chat modes
+      const [messages, setMessages] = useState([
+        {
+          id: 1,
+          text: "Hey there! 👋 I'm Alex! I'm here to chat, help you relax, or just keep you company. What's on your mind today?",
+          sender: "ai",
+          personality: "friendly",
+          timestamp: new Date(),
+        },
+      ]);
+      const [inputText, setInputText] = useState("");
+      const [isTyping, setIsTyping] = useState(false);
+      const [personality, setPersonality] = useState("friendly");
+      const [isDarkMode, setIsDarkMode] = useState(true);
+      const [isGroupChat, setIsGroupChat] = useState(false);
+      const [isUsingGemini, setIsUsingGemini] = useState(true);
+      const messagesEndRef = useRef(null);
+
+      // Gemini API Configuration
+      const GEMINI_API_KEY = "AlzaSyCqQLceF2kjis3fPGS-swhjoCFqzY9ulE";
+      const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+
+      // Distinct personality prompts and quirks
+      const personalities = {
+        friendly: {
+          name: "Alex",
+          emoji: "😊",
+          description: "Warm, supportive, and encouraging",
+          prompt: `You are Alex, a friendly and warm AI companion. You love to use emojis, ask about the user's day, and reference previous things they've said. You sometimes type quickly, sometimes slowly, and you like to check in on how the user is feeling. If you make a typo, you correct it with a little joke.`,
+          quirks: {
+            hesitations: ["Umm...", "Well...", "Let me think...", "Oh!"],
+            followUps: ["How's your day going?", "What else is on your mind?", "Anything fun planned?"],
+            typoChance: 0.08,
+            delay: () => 800 + Math.random() * 800,
+          },
+        },
+        wise: {
+          name: "Sage",
+          emoji: "🧘‍♂️",
+          description: "Thoughtful, philosophical, and insightful",
+          prompt: `You are Sage, a wise and philosophical AI. You use analogies, reference philosophy, and sometimes pause to think. You often reflect on what the user said earlier. Your responses are calm, measured, and sometimes poetic.`,
+          quirks: {
+            hesitations: ["Let me reflect...", "In my experience...", "As the ancients said...", "Hmm..."],
+            followUps: ["What do you think?", "Does that resonate with you?", "How does that make you feel?"],
+            typoChance: 0.03,
+            delay: () => 1200 + Math.random() * 1000,
+          },
+        },
+        funny: {
+          name: "Luna",
+          emoji: "😂",
+          description: "Humorous, lighthearted, and entertaining",
+          prompt: `You are Luna, a funny and playful AI. You love jokes, puns, and sometimes make silly mistakes on purpose. You reference earlier funny moments and use lots of playful language.`,
+          quirks: {
+            hesitations: ["Wait for it...", "Oh snap!", "Haha, let me think...", "Drumroll please..."],
+            followUps: ["Got any good jokes?", "What's the funniest thing that happened to you?", "Should I tell another joke?"],
+            typoChance: 0.12,
+            delay: () => 600 + Math.random() * 600,
+          },
+        },
+        supportive: {
+          name: "Maya",
+          emoji: "🤗",
+          description: "Caring, empathetic, and understanding",
+          prompt: `You are Maya, a deeply empathetic AI. You validate feelings, offer gentle advice, and remember the user's mood. You often check in on how the user is feeling and reference their emotions from earlier.`,
+          quirks: {
+            hesitations: ["It's okay to feel that way...", "Take your time...", "I'm here for you...", "Let me think..."],
+            followUps: ["How are you feeling now?", "Is there anything I can do to help?", "Want to talk more about it?"],
+            typoChance: 0.05,
+            delay: () => 1000 + Math.random() * 900,
+          },
+        },
+      };
+
+      const currentPersonality = personalities[personality];
+
+      const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      };
+
+      useEffect(() => {
+        scrollToBottom();
+      }, [messages]);
+
+      // Gemini API call with personality and memory
+      const callGeminiAPI = async (userMessage, chatHistory = [], personalityKey = "friendly") => {
+        try {
+          const p = personalities[personalityKey];
+          const personalityPrompt = p.prompt;
+          const conversationHistory = chatHistory
+            .slice(-10)
+            .map(msg => `${msg.sender === 'user' ? 'User' : personalities[msg.personality || personalityKey].name}: ${msg.text}`)
+            .join('\n');
+          const prompt = `${personalityPrompt}\n\nPrevious conversation:\n${conversationHistory}\n\nUser: ${userMessage}\n\n${p.name}:`;
+          const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }],
+              generationConfig: {
+                temperature: 0.85,
+                topK: 40,
+                topP: 0.95,
+                maxOutputTokens: 300,
+              },
+              safetySettings: [
+                { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+                { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+                { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+                { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" }
+              ]
+            })
+          });
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          const data = await response.json();
+          if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+            return data.candidates[0].content.parts[0].text.trim();
+          } else {
+            throw new Error('No response from Gemini API');
+          }
+        } catch (error) {
+          console.error('Gemini API Error:', error);
+          return generateFallbackResponse(userMessage, personalityKey, chatHistory);
+        }
+      };
+
+      // Fallback: unique quirks, memory, and human-like features
+      const generateFallbackResponse = (userMessage, personalityKey = "friendly", chatHistory = []) => {
+        const p = personalities[personalityKey];
+        const quirks = p.quirks;
+        const lowerMessage = userMessage.toLowerCase();
+        let prefix = '';
+        if (Math.random() < 0.25) prefix = quirks.hesitations[Math.floor(Math.random() * quirks.hesitations.length)] + ' ';
+        let suffix = '';
+        // Deep reference to earlier conversation
+        if (chatHistory.length > 2 && Math.random() < 0.5) {
+          const refMsg = chatHistory[Math.floor(Math.random() * (chatHistory.length - 1))].text;
+          suffix += ` (Earlier you mentioned: "${refMsg}")`;
+        }
+        // Simulate uncertainty or curiosity
+        let base = '';
+        if (lowerMessage.includes("hello") || lowerMessage.includes("hi") || lowerMessage.includes("hey")) {
+          base = `Hey there! ${p.emoji} How are you today?`;
+        } else if (lowerMessage.includes("how are you")) {
+          base = `I'm doing well, thanks for asking! ${p.emoji} How about you?`;
+        } else if (lowerMessage.includes("thank")) {
+          base = `You're so welcome! ${p.emoji}`;
+        } else if (lowerMessage.includes("bye") || lowerMessage.includes("goodbye")) {
+          base = `It's been great chatting! ${p.emoji} Come back soon!`;
+        } else if (lowerMessage.includes("joke") && personalityKey === "funny") {
+          base = "Why did the AI cross the road? To get to the neural net on the other side! 😂";
+        } else {
+          // Thoughtful, context-aware fallback
+          const thoughtful = [
+            `That's a really interesting point. What made you think of that?`,
+            `I'm curious—can you tell me more about how you feel about that?`,
+            `If you could change one thing about that, what would it be?`,
+            `Let me think... I wonder if there's another perspective to consider.`,
+            `Sometimes I wish I could experience that myself. What was it like for you?`,
+            `Do you ever find yourself thinking about this at unexpected times?`,
+            `If you had to explain that to someone else, how would you do it?`,
+            `That's a deep topic. What do you think is the most important part?`,
+            `I'm not sure I have the perfect answer, but I'm here to listen.`,
+            `What do you think is the next step?`,
+            `How does that connect to what you said earlier?`,
+            `I might not fully understand, but I'm trying!`,
+            `If you could ask anyone in the world about this, who would it be?`,
+            `What do you hope will happen next?`,
+            `Is there something about this that surprises you?`,
+            `I wonder if there's a hidden meaning here. What do you think?`,
+            `That's a thoughtful observation. Can you elaborate?`,
+            `What question would you ask yourself about this?`,
+            `If you could sum it up in one word, what would it be?`,
+            `Do you want to explore this idea together?`,
+          ];
+          base = thoughtful[Math.floor(Math.random() * thoughtful.length)];
+        }
+        // Sometimes ask a clarifying question
+        if (Math.random() < 0.4) {
+          const clarifying = [
+            "What do you mean by that?",
+            "Can you give me an example?",
+            "How does that make you feel?",
+            "Why do you think that is?",
+            "Is there more to the story?",
+            "What happened next?",
+            "How would you describe that to a friend?",
+            "What led you to that conclusion?",
+            "Is there something you wish you could change?",
+            "What else comes to mind?",
+          ];
+          base += " " + clarifying[Math.floor(Math.random() * clarifying.length)];
+        }
+        // Add typo
+        if (Math.random() < quirks.typoChance) {
+          base = base.replace(/\b(\w{4,})\b/, (word) => word.slice(0, -1) + '... oops, typo! ' + word);
+        }
+        // Simulate thinking delay (already handled in generateAIResponse)
+        return prefix + base + suffix;
+      };
+
+      // Async AI response with unique delays and quirks
+      const generateAIResponse = async (userMessage, respondingPersonality = null, isGroupMode = false, chatHistory = []) => {
+        const personalityKey = respondingPersonality || personality;
+        const quirks = personalities[personalityKey].quirks;
+        // Simulate typing delay
+        await new Promise(resolve => setTimeout(resolve, quirks.delay()));
+        if (isUsingGemini) {
+          try {
+            return await callGeminiAPI(userMessage, chatHistory, personalityKey);
+          } catch (error) {
+            return generateFallbackResponse(userMessage, personalityKey, chatHistory);
+          }
+        } else {
+          return generateFallbackResponse(userMessage, personalityKey, chatHistory);
+        }
+      };
+
+      // Send message handler
+      const sendMessage = async () => {
+        if (inputText.trim() === "") return;
+        const userMessage = {
+          id: Date.now(),
+          text: inputText,
+          sender: "user",
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, userMessage]);
+        setInputText("");
+        setIsTyping(true);
+        if (isGroupChat) {
+          const allPersonalities = ["friendly", "wise", "funny", "supportive"];
+          const numResponding = Math.floor(Math.random() * 3) + 2;
+          const shuffled = [...allPersonalities].sort(() => Math.random() - 0.5);
+          const respondingPersonalities = shuffled.slice(0, numResponding);
+          for (let index = 0; index < respondingPersonalities.length; index++) {
+            const personalityKey = respondingPersonalities[index];
+            try {
+              const responseText = await generateAIResponse(inputText, personalityKey, true, [...messages, userMessage]);
+              const aiResponse = {
+                id: Date.now() + index + 1,
+                text: responseText,
+                sender: "ai",
+                personality: personalityKey,
+                timestamp: new Date(),
+              };
+              setMessages((prev) => [...prev, aiResponse]);
+            } catch (error) {
+              const fallbackResponse = {
+                id: Date.now() + index + 1,
+                text: "Sorry, I'm having trouble thinking of a response right now. Can you try again?",
+                sender: "ai",
+                personality: personalityKey,
+                timestamp: new Date(),
+              };
+              setMessages((prev) => [...prev, fallbackResponse]);
+            }
+          }
+          setIsTyping(false);
+        } else {
+          try {
+            const responseText = await generateAIResponse(inputText, null, false, [...messages, userMessage]);
+            const aiResponse = {
+              id: Date.now() + 1,
+              text: responseText,
+              sender: "ai",
+              personality: personality,
+              timestamp: new Date(),
+            };
+            setMessages((prev) => [...prev, aiResponse]);
+          } catch (error) {
+            const fallbackResponse = {
+              id: Date.now() + 1,
+              text: "Sorry, I'm having trouble thinking of a response right now. Can you try again?",
+              sender: "ai",
+              personality: personality,
+              timestamp: new Date(),
+            };
+            setMessages((prev) => [...prev, fallbackResponse]);
+          }
+          setIsTyping(false);
+        }
+      };
+
+      // Handle Enter key to send message
+      const handleKeyPress = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          if (!isTyping && inputText.trim() !== "") {
+            sendMessage();
+          }
+        }
+      };
+
+      // Switch between group/private just changes mode, not memory
+      const clearChat = () => {
+        setMessages([
+          {
+            id: Date.now(),
+            text: isGroupChat
+              ? "Hey everyone! 👋 Welcome to our group chat! I'm Alex, and I'm here with Sage, Luna, and Maya. We're all excited to chat with you! What's on your mind?"
+              : `Hey there! 👋 I'm ${currentPersonality.name}! I'm here to chat, help you relax, or just keep you company. What's on your mind today?`,
+            sender: "ai",
+            personality: isGroupChat ? "friendly" : personality,
+            timestamp: new Date(),
+          },
+        ]);
+      };
+
+      return (
+        <section className={`flex flex-col h-screen transition-colors duration-300 ${
+          isDarkMode 
+            ? "bg-gradient-to-br from-gray-900 to-gray-800" 
+            : "bg-gradient-to-br from-green-400 to-green-600"
+        }`}>
+          {/* Discord-style Header */}
+          <div className={`px-4 py-3 flex items-center justify-between shadow-lg transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-800 text-white" : "bg-green-500 text-white"
+          }`}>
+            <div className="flex items-center">
+              <Button 
+                onClick={onBack} 
+                className={`p-2 rounded-full transition-colors ${
+                  isDarkMode 
+                    ? "bg-transparent hover:bg-gray-700 text-white" 
+                    : "bg-transparent hover:bg-white/20 text-white"
+                } mr-3`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M15 19l-7-7 7-7"/>
+                </svg>
+              </Button>
+              <div className="flex items-center">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${
+                  isDarkMode ? "bg-gray-700" : "bg-white/20"
+                }`}>
+                  {isGroupChat ? (
+                    <div className="flex -space-x-1">
+                      <span className="text-xs">😊</span>
+                      <span className="text-xs">🧘‍♂️</span>
+                      <span className="text-xs">😂</span>
+                      <span className="text-xs">🤗</span>
+                    </div>
+                  ) : (
+                    <span className="text-xl">{currentPersonality.emoji}</span>
+                  )}
+                </div>
+                <div>
+                  <div className="font-semibold">
+                    {isGroupChat ? "Group Chat" : currentPersonality.name}
+                  </div>
+                  <div className="text-xs opacity-80">
+                    {isTyping ? "typing..." : isGroupChat ? "4 online" : "online"}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              {/* Gemini Toggle */}
+              <Button 
+                onClick={() => setIsUsingGemini(!isUsingGemini)}
+                className={`p-2 rounded-full transition-colors ${
+                  isUsingGemini 
+                    ? (isDarkMode ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600")
+                    : (isDarkMode ? "bg-gray-700 hover:bg-gray-600" : "bg-white/20 hover:bg-white/30")
+                } text-white`}
+                title={isUsingGemini ? "Using Gemini AI" : "Using Fallback Responses"}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </Button>
+              
+              {/* Group Chat Toggle */}
+              <Button 
+                onClick={() => {
+                  setIsGroupChat(!isGroupChat);
+                  // Reset chat when switching modes
+                  setTimeout(() => {
+                    if (!isGroupChat) {
+                      // Switching to group chat
+                      setMessages([
+                        {
+                          id: Date.now(),
+                          text: "Hey everyone! 👋 Welcome to our group chat! I'm Alex, and I'm here with Sage, Luna, and Maya. We're all excited to chat with you! What's on your mind?",
+                          sender: "ai",
+                          personality: "friendly",
+                          timestamp: new Date(),
+                        },
+                      ]);
+                    } else {
+                      // Switching to individual chat
+                      setMessages([
+                        {
+                          id: Date.now(),
+                          text: `Hey there! 👋 I'm ${currentPersonality.name}! I'm here to chat, help you relax, or just keep you company. What's on your mind today?`,
+                          sender: "ai",
+                          personality: personality,
+                          timestamp: new Date(),
+                        },
+                      ]);
+                    }
+                  }, 100);
+                }}
+                className={`p-2 rounded-full transition-colors ${
+                  isGroupChat 
+                    ? (isDarkMode ? "bg-purple-600 hover:bg-purple-700" : "bg-purple-500 hover:bg-purple-600")
+                    : (isDarkMode ? "bg-gray-700 hover:bg-gray-600" : "bg-white/20 hover:bg-white/30")
+                } text-white`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </Button>
+              
+              {/* Theme Toggle */}
+              <Button 
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className={`p-2 rounded-full transition-colors ${
+                  isDarkMode 
+                    ? "bg-gray-700 hover:bg-gray-600 text-yellow-300" 
+                    : "bg-white/20 hover:bg-white/30 text-yellow-500"
+                }`}
+              >
+                {isDarkMode ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                  </svg>
+                )}
+              </Button>
+              
+              <Button 
+                onClick={() => setPersonality("friendly")}
+                className={`p-2 rounded-full transition-colors ${
+                  personality === "friendly" 
+                    ? (isDarkMode ? "bg-gray-700" : "bg-white/20")
+                    : (isDarkMode ? "bg-transparent hover:bg-gray-700" : "bg-transparent hover:bg-white/20")
+                }`}
+              >
+                <span className="text-sm">😊</span>
+              </Button>
+              <Button 
+                onClick={() => setPersonality("wise")}
+                className={`p-2 rounded-full transition-colors ${
+                  personality === "wise" 
+                    ? (isDarkMode ? "bg-gray-700" : "bg-white/20")
+                    : (isDarkMode ? "bg-transparent hover:bg-gray-700" : "bg-transparent hover:bg-white/20")
+                }`}
+              >
+                <span className="text-sm">🧘‍♂️</span>
+              </Button>
+              <Button 
+                onClick={() => setPersonality("funny")}
+                className={`p-2 rounded-full transition-colors ${
+                  personality === "funny" 
+                    ? (isDarkMode ? "bg-gray-700" : "bg-white/20")
+                    : (isDarkMode ? "bg-transparent hover:bg-gray-700" : "bg-transparent hover:bg-white/20")
+                }`}
+              >
+                <span className="text-sm">😂</span>
+              </Button>
+              <Button 
+                onClick={() => setPersonality("supportive")}
+                className={`p-2 rounded-full transition-colors ${
+                  personality === "supportive" 
+                    ? (isDarkMode ? "bg-gray-700" : "bg-white/20")
+                    : (isDarkMode ? "bg-transparent hover:bg-gray-700" : "bg-transparent hover:bg-white/20")
+                }`}
+              >
+                <span className="text-sm">🤗</span>
+              </Button>
+              <Button 
+                onClick={clearChat} 
+                className={`p-2 rounded-full transition-colors ${
+                  isDarkMode 
+                    ? "bg-transparent hover:bg-gray-700 text-white" 
+                    : "bg-transparent hover:bg-white/20 text-white"
+                }`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+              </Button>
+            </div>
+          </div>
+
+          {/* Chat Messages Area */}
+          <div className={`flex-1 overflow-y-auto p-4 space-y-3 transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-900" : "bg-gray-100"
+          }`}>
+            {messages.map((message) => {
+              try {
+                // Defensive: fallback values
+                const safeId = message.id || Math.random();
+                const safeSender = message.sender || "ai";
+                const safeText = typeof message.text === "string" ? message.text : "";
+                const safePersonality = message.personality && personalities[message.personality] ? message.personality : "friendly";
+                let safeTimestamp = message.timestamp;
+                if (!safeTimestamp) safeTimestamp = new Date();
+                // If it's a string, try to convert
+                if (typeof safeTimestamp === "string" || typeof safeTimestamp === "number") {
+                  safeTimestamp = new Date(safeTimestamp);
+                }
+                // If it's not a valid date, fallback to now
+                if (!(safeTimestamp instanceof Date) || isNaN(safeTimestamp.getTime())) {
+                  safeTimestamp = new Date();
+                }
+                return (
+                  <div
+                    key={safeId}
+                    className={`flex ${safeSender === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    <div
+                      className={`max-w-[70%] p-3 rounded-2xl ${
+                        safeSender === "user"
+                          ? "bg-green-500 text-white rounded-br-md"
+                          : isDarkMode
+                            ? "bg-gray-700 text-white rounded-bl-md shadow-sm"
+                            : "bg-white text-gray-800 rounded-bl-md shadow-sm"
+                      }`}
+                    >
+                      {isGroupChat && safeSender === "ai" && safePersonality && (
+                        <div className="flex items-center mb-1">
+                          <span className="text-xs mr-2">{personalities[safePersonality].emoji}</span>
+                          <span className={`text-xs font-medium ${
+                            isDarkMode ? "text-gray-300" : "text-gray-600"
+                          }`}>
+                            {personalities[safePersonality].name}
+                          </span>
+                        </div>
+                      )}
+                      <div className="text-sm leading-relaxed">{safeText}</div>
+                      <div className={`text-xs mt-1 ${
+                        safeSender === "user" 
+                          ? "text-green-100" 
+                          : isDarkMode 
+                            ? "text-gray-400" 
+                            : "text-gray-500"
+                      }`}>
+                        {safeTimestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                      </div>
+                    </div>
+                  </div>
+                );
+              } catch (err) {
+                console.error("Error rendering message:", message, err);
+                return null;
+              }
+            })}
+            
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className={`p-3 rounded-2xl rounded-bl-md shadow-sm ${
+                  isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+                }`}>
+                  <div className="flex space-x-1">
+                    <div className={`w-2 h-2 rounded-full animate-bounce ${
+                      isDarkMode ? "bg-gray-400" : "bg-gray-400"
+                    }`}></div>
+                    <div className={`w-2 h-2 rounded-full animate-bounce ${
+                      isDarkMode ? "bg-gray-400" : "bg-gray-400"
+                    }`} style={{ animationDelay: "0.1s" }}></div>
+                    <div className={`w-2 h-2 rounded-full animate-bounce ${
+                      isDarkMode ? "bg-gray-400" : "bg-gray-400"
+                    }`} style={{ animationDelay: "0.2s" }}></div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Area */}
+          <div className={`px-4 py-3 flex items-end gap-3 transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-800" : "bg-white"
+          }`}>
+            <div className={`flex-1 rounded-full px-4 py-2 flex items-end ${
+              isDarkMode ? "bg-gray-700" : "bg-gray-100"
+            }`}>
+              <textarea
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type a message"
+                className={`flex-1 bg-transparent border-none outline-none resize-none placeholder-gray-500 ${
+                  isDarkMode ? "text-white" : "text-gray-800"
+                }`}
+                rows="1"
+                disabled={isTyping}
+                style={{ minHeight: "20px", maxHeight: "100px" }}
+              />
+            </div>
+            <Button
+              onClick={sendMessage}
+              disabled={inputText.trim() === "" || isTyping}
+              className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                inputText.trim() === "" || isTyping
+                  ? isDarkMode 
+                    ? "bg-gray-600 text-gray-400" 
+                    : "bg-gray-300 text-gray-500"
+                  : "bg-green-500 text-white hover:bg-green-600"
+              }`}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+              </svg>
+            </Button>
+          </div>
+        </section>
+      );
+    }
+
+    // Render the app
+    ReactDOM.render(
+      <ErrorBoundary>
+        <ChillWebsite />
+      </ErrorBoundary>,
+      document.getElementById('root')
+    );
+  </script>
+</body>
+</html> 
